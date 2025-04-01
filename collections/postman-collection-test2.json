@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "51633202-f8a4-404a-8e49-88caabf1e79b",
+		"name": "Postman Library API v2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17461778",
+		"_collection_link": "https://crimson-spaceship-379348.postman.co/workspace/Postman-API-Fundamentals-Studen~034d9d84-a690-4af4-af93-21b366eef309/collection/17461778-51633202-f8a4-404a-8e49-88caabf1e79b?action=share&source=collection_link&creator=17461778"
+	},
+	"item": [
+		{
+			"name": "get books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/books",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get fiction books",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/books?genre=fiction&checkedOut=false&search=ficciones",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "fiction"
+						},
+						{
+							"key": "checkedOut",
+							"value": "false"
+						},
+						{
+							"key": "search",
+							"value": "ficciones"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get book by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/books/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "d357115c-42d1-4aaa-a9d8-dd6cfa44a9ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// save the \"id\" value from the response to a variable named \"id\"\r",
+							"const id = pm.response.json().id\r",
+							"// save the id as a collection variable named \"id\"\r",
+							"pm.collectionVariables.set(\"id\", id)\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"A Arte do Teste 5\",\r\n  \"author\": \"Vinicius Nascimento\",\r\n  \"genre\": \"fiction\",\r\n  \"yearPublished\": 2025\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/books",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkout a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// save the \"id\" value from the response to a variable named \"id\"\r",
+							"const id = pm.response.json().id\r",
+							"// save the id as a collection variable named \"id\"\r",
+							"pm.collectionVariables.set(\"id\", id)\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n  \"checkedOut\": true \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/books/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/books/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"books",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "skill check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const actorName = pm.response.json().json.actorName\r",
+							"pm.collectionVariables.set(\"favoriteActor\", actorName)\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "skillcheck",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "student-expert",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"actorName\": \"Ator Teste\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{skillcheckBaseUrl}}/post?movieName=filme teste",
+					"host": [
+						"{{skillcheckBaseUrl}}"
+					],
+					"path": [
+						"post"
+					],
+					"query": [
+						{
+							"key": "movieName",
+							"value": "filme teste"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "api-key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "postmanrulz",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://library-api.postmanlabs.com",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": ""
+		},
+		{
+			"key": "skillcheckBaseUrl",
+			"value": "https://postman-echo.com",
+			"type": "string"
+		},
+		{
+			"key": "favoriteActor",
+			"value": ""
+		}
+	]
+}

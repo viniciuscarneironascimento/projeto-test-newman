@@ -1,0 +1,25 @@
+name: API Tests with Newman
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest  
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3  
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Instalar Newman
+        run: npm install -g newman  
+
+      - name: Rodar Testes da API
+        run: newman run collections/postman-collection-test.json -r cli,json  
