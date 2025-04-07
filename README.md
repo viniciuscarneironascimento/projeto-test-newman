@@ -14,14 +14,9 @@ Ele permite automatizar fluxos de trabalho, como:
 
 
 
-comandos:
+Comandos (use bash no terminal):
 
-newman run <nome arquivo exportado na pasta local>
-newman run arquivo-teste-collection.json
-
-
-newman run <URL>
-https://api.postman.com/collections/url aqui
+newman run collections/postman-collection-test.json -r cli,json
 
 
 CRIANDO UM PROJETO NO VS CODE:
