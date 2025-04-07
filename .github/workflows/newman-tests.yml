@@ -26,10 +26,16 @@ jobs:
       - name: Rodar Testes da API com Newman
         run: |
           mkdir -p newman
-          newman run collections/postman-collection-test3.json \
+          echo "🚀 Iniciando execução dos testes da API..."
+          if newman run collections/postman-collection-test3.json \
             -r cli,json,htmlextra \
             --reporter-json-export ./newman/report.json \
-            --reporter-htmlextra-export ./newman/report.html
+            --reporter-htmlextra-export ./newman/report.html; then
+              echo "✅ Testes concluídos com sucesso!"
+          else
+              echo "❌ Erros encontrados nos testes! Verifique o relatório em ./newman/report.html"
+              exit 1
+          fi
 
       - name: Fazer upload do relatório HTML como artefato
         if: always()
