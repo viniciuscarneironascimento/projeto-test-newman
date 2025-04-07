@@ -18,24 +18,21 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar Newman
-        run: npm install -g newman  
-
-      - name: Criar pasta de relatório
-        run: mkdir -p newman
+      - name: Instalar Newman e HTML Extra Reporter
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
 
       - name: Rodar Testes da API
         run: |
+          mkdir -p newman
           newman run collections/postman-collection-test3.json \
             -r cli,json,htmlextra \
-            --reporter-json-export ./newman/report.json \
-            --reporter-htmlextra-export ./newman/report.html
-          echo ""
-          echo "O relatório HTML será salvo como artifact. Verifique no final desta execução."
+            --reporter-json-export newman/report.json \
+            --reporter-htmlextra-export newman/report.html
 
-      - name: Publicar relatório como artifact
-        uses: actions/upload-artifact@v3
+      - name: Fazer upload do relatório HTML como artefato
+        uses: actions/upload-artifact@v4
         with:
-          name: newman-html-report
+          name: Relatorio-Newman-HTML
           path: newman/report.html
-
