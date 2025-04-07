@@ -18,26 +18,21 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar Newman e HTML Extra Reporter
+      - name: Instalar Newman e o reporter htmlextra
         run: |
           npm install -g newman
-          npm install -g newman-reporter-htmlextra --unsafe-perm=true
+          npm install -g newman-reporter-htmlextra
 
-      - name: Rodar Testes da API
+      - name: Rodar Testes da API com Newman
         run: |
           mkdir -p newman
           newman run collections/postman-collection-test3.json \
             -r cli,json,htmlextra \
-            --reporter-json-export newman/report.json \
-            --reporter-htmlextra-export newman/report.html || true
+            --reporter-json-export ./newman/report.json \
+            --reporter-htmlextra-export ./newman/report.html
 
-          echo ""
-          echo "✅ Relatório HTML gerado:"
-          echo "📄 newman/report.html"
-          echo "Você pode baixá-lo nos artefatos da pipeline ou abrir esse caminho local se estiver rodando fora do GitHub Actions."
-          
       - name: Fazer upload do relatório HTML como artefato
         uses: actions/upload-artifact@v3
         with:
-          name: Relatorio-Newman-HTML
-          path: newman/report.html
+          name: newman-html-report
+          path: ./newman/report.html
