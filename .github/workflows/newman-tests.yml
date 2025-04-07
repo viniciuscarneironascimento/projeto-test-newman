@@ -37,7 +37,7 @@ jobs:
           echo "Você pode baixá-lo nos artefatos da pipeline ou abrir esse caminho local se estiver rodando fora do GitHub Actions."
           
       - name: Fazer upload do relatório HTML como artefato
-        uses: actions/upload-artifact@v3.1.3
+        uses: actions/upload-artifact@v3
         with:
           name: Relatorio-Newman-HTML
           path: newman/report.html
