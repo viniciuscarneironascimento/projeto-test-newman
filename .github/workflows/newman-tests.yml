@@ -32,7 +32,7 @@ jobs:
             --reporter-htmlextra-export newman/report.html
 
       - name: Fazer upload do relatório HTML como artefato
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: Relatorio-Newman-HTML
           path: newman/report.html
