@@ -53,6 +53,19 @@ Para executar os testes com Newman, use o seguinte comando no terminal:
 newman run collections/postman-collection-test.json -r cli,json
 
 
+obs:
+newman run collections/postman-collection-test.json -e environments/dev-environment.json
+-e ou --environment → indica o arquivo de Environment que será usado.
+Newman vai substituir todas as variáveis da collection pelos valores definidos nesse Environment.
+
+
+"scripts": {
+  "test:dev": "newman run collections/postman-collection-test.json -e environments/dev-environment.json",
+  "test:homolog": "newman run collections/postman-collection-test.json -e environments/homolog-environment.json",
+  "test:prod": "newman run collections/postman-collection-test.json -e environments/prod-environment.json"
+}
+
+
 CRIANDO UM PROJETO NO VS CODE:
 
 1- Crie uma pasta do projeto
